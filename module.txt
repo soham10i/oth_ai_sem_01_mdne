@@ -1,0 +1,21 @@
+R&D
+1. Analysis
+2. WorkFlow
+3. Technology Stack (FastAPI, Docker)
+4. Database design (MySQL, MongoDB, InfluxDB)
+
+Implementation Modules:
+1. User (Authentication)
+2. Houses
+3. Residents 
+4. Mail
+5. Sensor and Sensor Data (influx and mongo)
+6. bill generation (mongo and mysql)
+7. calender and calender events (mysql)
+8. Notification
+
+UML Diagrams
+1. ER Diagram
+2. Use case Diagram 
+3. Activity Diagram
+

@@ -4,6 +4,7 @@ from datetime import datetime, time, timedelta
 from typing import Optional
 
 import schedule
+from app.services.sensor_data_service import periodic_generate_sensor_data_for_house
 
 # MongoDB settings
 MONGO_URI = "mongodb://localhost:27017/"  # Local MongoDB URI, change for cloud-based MongoDB
@@ -86,6 +87,14 @@ def ten_day_summary_api():
 def root():
     return {"message": "Welcome to the Smart Home API!"}
 
+# Function to generate sensor data periodically
+def generate_sensor_data_periodically():
+    house_ids = [1, 2, 3]  # Example house IDs, replace with actual IDs
+    for house_id in house_ids:
+        periodic_generate_sensor_data_for_house(house_id)
+
+# Schedule the periodic generation of sensor data
+schedule.every(10).seconds.do(generate_sensor_data_periodically)  # Adjust the interval as needed
 
 if __name__ == "__main__":
     while True:
@@ -112,14 +121,14 @@ if __name__ == "__main__":
                 print("Invalid input. Please enter a numeric house_id and a valid month.")
 
         elif choice == "2":
-            print("Enabling automatic 10-day summary calculation...")
+            print("Enabling automatic 10-day summary calculation and periodic sensor data generation...")
             schedule.every(10).seconds.do(ten_day_summary_api)  # Run every 10 seconds for testing 10-day summary
-            print("Scheduled checks for 10-day summary. Running in the background...")
+            schedule.every(10).seconds.do(generate_sensor_data_periodically)  # Run every 10 seconds for testing
+
+            print("Scheduled checks for 10-day summary and periodic sensor data generation. Running in the background...")
 
             try:
                 while True:
-                    if ten_day_summary_api():  # Break the loop if the summary was already executed
-                        break
                     schedule.run_pending()
                     time.sleep(1)
             except KeyboardInterrupt:

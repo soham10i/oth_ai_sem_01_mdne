@@ -2,7 +2,7 @@ from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 
 # InfluxDB configuration
-bucket = "smart_home"
+bucket = "smart_home_sensor_data"
 org = "smart_home_organisation"
 token = "l2A12FUbNdmP19DsZD5NZJ0Jbx4_rGuuhPL1LRMVJ6F3ksTp3wyd8hx7pdRgSKI1fW6gUMysouKtqc0a6BMbxg=="
 url = "http://localhost:8086"

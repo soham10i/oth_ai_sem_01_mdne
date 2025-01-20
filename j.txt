@@ -1,0 +1,46 @@
+Request Body 
+Authentication:
+/auth/login
+{
+  "email": "johndoe@example.com",
+  "password": "securepassword123"
+}
+
+/auth/register
+{
+  "username": "johndoe",
+  "firstname": "John",
+  "lastname": "Doe",
+  "dob": "1990-01-01",
+  "email": "johndoe@example.com",
+  "password": "securepassword123"
+}
+
+{
+  "username": "user_one",
+  "firstname": "User",
+  "lastname": "One",
+  "dob": "1990-01-01",
+  "email": "user.one@mail.com",
+  "password": "UserOne@123456",
+  "user_type": "resident"
+}
+
+Houses
+/houses/add
+{
+  "house_name": "My Smart Home",
+  "address": "1234 Elm Street, Springfield, IL",
+  "owner_id": 1
+}
+
+
+sensor
+/sensor/add
+{
+    "sensor_name": "Temperature Sensor",
+    "sensor_type": "temperature",
+    "sensor_manufacturer": "SensorTech",
+    "house_id": 1,
+    "sensor_unit": "C"
+}

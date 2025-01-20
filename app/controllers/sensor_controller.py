@@ -21,6 +21,17 @@ def add_sensor_data(sensor: SensorCreate, db: Session = Depends(get_db), current
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Sensor could not be added")
     return db_sensor
 
+# Sample request body for /add endpoint
+"""
+{
+    "sensor_name": "Temperature Sensor",
+    "sensor_type": "temperature",
+    "sensor_manufacturer": "SensorTech",
+    "house_id": 1,
+    "sensor_unit": "C"
+}
+"""
+
 @router.put("/update/{sensor_id}", response_model=SensorResponse)
 def update_sensor_data(sensor_id: int, sensor: SensorCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     check_user_type(current_user)
