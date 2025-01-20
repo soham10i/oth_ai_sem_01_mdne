@@ -1,0 +1,16 @@
+mysql-connector-python==9.1.0
+pydantic==2.10.5
+pydantic-settings==2.0.3
+SQLAlchemy==2.0.37
+pymongo==4.10.1
+fastapi==0.115.6
+mysqlclient==2.2.7
+fastapi
+uvicorn
+sqlalchemy
+passlib[bcrypt]
+pydantic_settings
+pymysql
+jwt
+pyjwt
+influxdb-client==1.48.0

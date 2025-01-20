@@ -1,0 +1,31 @@
+{
+    "house_id": 1,
+    "sensor_data": {
+        "temperature": {
+            "sensor_id": 1,
+            "value": 22.5,
+            "unit": "C"
+        },
+        "humidity": {
+            "sensor_id": 2,
+            "value": 50,
+            "unit": "%"
+        },
+        "pressure": {
+            "sensor_id": 3,
+            "value": 1013,
+            "unit": "hPa"
+        },
+        "electricity": {
+            "sensor_id": 4,
+            "value": 3.5,
+            "unit": "kWh"
+        },
+        "gas": {
+            "sensor_id": 5,
+            "value": 2,
+            "unit": "m3"
+        }
+    },
+    "timestamp": "2023-10-01 12:00:00"
+}
