@@ -1,6 +1,10 @@
 from sqlalchemy import Column, Integer, String, DECIMAL, Date, Enum, ForeignKey, TIMESTAMP
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
+from pydantic import BaseModel
+from datetime import date, datetime
+from decimal import Decimal
+from enum import Enum as PyEnum
 
 Base = declarative_base()
 
@@ -18,3 +22,27 @@ class BillInfo(Base):
     due_date = Column(Date)
     created_at = Column(TIMESTAMP, server_default=func.now())
     updated_at = Column(TIMESTAMP, server_default=func.now(), onupdate=func.now())
+    class BillTypeEnum(PyEnum):
+        gas = 'gas'
+        electricity = 'electricity'
+
+    class AccessLevelEnum(PyEnum):
+        owner_only = 'owner_only'
+        shared = 'shared'
+        public = 'public'
+
+    class BillInfoResponse(BaseModel):
+        bill_id: int
+        bill_name: str
+        bill_type: str
+        total_consumption: Decimal
+        amount: Decimal
+        house_id: int
+        user_id: int
+        access_level: str
+        due_date: date
+        created_at: datetime
+        updated_at: datetime
+
+        class Config:
+            orm_mode = True

@@ -1,5 +1,8 @@
 import pytest
 from unittest.mock import patch, MagicMock
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from app.controllers.sensor_data_controller import generate_sensor_data_periodically
 from app.services.sensor_data_service import get_sensors, generate_sensor_data_for_house
 

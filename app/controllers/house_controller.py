@@ -1,3 +1,33 @@
+
+
+
+"""
+This module defines the house controller for the smart home management application.
+It provides endpoints for adding, fetching, updating, and deleting house records.
+Endpoints:
+- POST /add: Add a new house. Requires 'owner' or 'admin' user type.
+- GET /fetchAll: Fetch all houses with pagination. Requires 'admin' user type.
+- GET /fetch/owner: Fetch houses by owner ID. Requires 'owner' or 'admin' user type.
+- PUT /update: Update house details. Requires 'admin' user type.
+- DELETE /delete: Delete a house by ID. Requires 'admin' user type.
+- GET /fetch: Fetch a house by ID. Requires 'owner' or 'admin' user type.
+Dependencies:
+- FastAPI's APIRouter for routing.
+- HTTPException and status for error handling.
+- Depends for dependency injection.
+- SQLAlchemy's Session for database interaction.
+- Custom services and models for house and user management.
+Functions:
+- check_user_type: Checks if the current user is an 'owner' or 'admin'.
+- check_admin_user: Checks if the current user is an 'admin'.
+- add_house: Adds a new house.
+- fetch_all_houses: Fetches all houses with pagination.
+- fetch_houses_by_owner: Fetches houses by owner ID.
+- update_house_details: Updates house details.
+- delete_house_details: Deletes a house by ID.
+- fetch_house: Fetches a house by ID.
+"""
+
 from fastapi import APIRouter, HTTPException, status, Depends
 from typing import List
 from app.models.house import HouseCreate, HouseResponse

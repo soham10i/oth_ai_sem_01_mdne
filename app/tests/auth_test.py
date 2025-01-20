@@ -1,7 +1,10 @@
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy.orm import Session
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from app.main import app
+from unittest.mock import patch, MagicMock
 from app.database.connection import get_db
 from app.models.user import UserCreate
 from app.services.auth_service import create_user
@@ -98,3 +101,26 @@ def test_login_invalid_password(test_user):
         assert response.json()["detail"] == "Invalid email or password"
     except Exception as e:
         pytest.fail(f"Test failed: {str(e)}")
+
+def test_get_user_details(test_user):
+    response = client.get(f"/users/{test_user.id}")
+    assert response.status_code == 200
+    assert response.json()["email"] == test_user.email
+
+def test_update_user_details(test_user):
+    update_data = {
+        "firstname": "Updated",
+        "lastname": "User",
+        "dob": "1990-01-01",
+        "email": "updateduser@example.com",
+        "password": "newpassword",
+        "user_type": "resident"
+    }
+    response = client.put(f"/users/{test_user.id}", json=update_data)
+    assert response.status_code == 200
+    assert response.json()["email"] == "updateduser@example.com"
+
+def test_delete_user(test_user):
+    response = client.delete(f"/users/{test_user.id}")
+    assert response.status_code == 200
+    assert response.json()["detail"] == "User deleted successfully"

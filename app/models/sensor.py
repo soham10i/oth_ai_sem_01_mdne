@@ -1,4 +1,32 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, TIMESTAMP
+"""
+This module defines the SQLAlchemy model and Pydantic schemas for the Sensor entity.
+Classes:
+    Sensor(Base): SQLAlchemy model for the 'Sensors_Info' table.
+        Attributes:
+            sensor_id (int): Primary key, auto-incremented.
+            sensor_name (str): Name of the sensor.
+            sensor_type (str): Type of the sensor.
+            sensor_manufacturer (str): Manufacturer of the sensor.
+            house_id (int): Foreign key referencing the 'Houses' table.
+            sensor_unit (str): Unit of measurement for the sensor.
+            created_at (datetime): Timestamp when the sensor record was created.
+            updated_at (datetime): Timestamp when the sensor record was last updated.
+    SensorBase(BaseModel): Pydantic base schema for Sensor.
+        Attributes:
+            sensor_name (str): Name of the sensor.
+            sensor_type (str): Type of the sensor.
+            sensor_manufacturer (str): Manufacturer of the sensor.
+            house_id (int): Foreign key referencing the 'Houses' table.
+            sensor_unit (str): Unit of measurement for the sensor.
+    SensorCreate(SensorBase): Pydantic schema for creating a new Sensor.
+        Inherits all attributes from SensorBase.
+    SensorResponse(SensorBase): Pydantic schema for returning a Sensor response.
+        Attributes:
+            sensor_id (int): Primary key, auto-incremented.
+            created_at (datetime): Timestamp when the sensor record was created.
+            updated_at (datetime): Timestamp when the sensor record was last updated.
+"""
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 from pydantic import BaseModel

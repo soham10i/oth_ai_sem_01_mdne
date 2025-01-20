@@ -1,3 +1,13 @@
+"""
+This module defines the FastAPI routes for user profile management.
+
+Functions:
+    get_current_user_details(db: Session, current_user: User): Fetches the current user's details.
+    update_current_user(user_update: UserCreate, db: Session, current_user: User): Updates the current user's details.
+    delete_current_user(db: Session, current_user: User): Deletes the current user's account.
+    fetch_all_users(db: Session, current_user: User): Fetches all users (admin only).
+"""
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from app.models.user import User, UserResponse, UserCreate

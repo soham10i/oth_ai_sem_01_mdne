@@ -1,31 +1,32 @@
+
 {
-    "house_id": 1,
+    "house_id": 2,
     "sensor_data": {
         "temperature": {
             "sensor_id": 1,
-            "value": 22.5,
+            "value": 27.18,
             "unit": "C"
         },
         "humidity": {
             "sensor_id": 2,
-            "value": 50,
+            "value": 55,
             "unit": "%"
         },
         "pressure": {
             "sensor_id": 3,
-            "value": 1013,
+            "value": 1014,
             "unit": "hPa"
         },
         "electricity": {
             "sensor_id": 4,
-            "value": 3.5,
+            "value": 7.08,
             "unit": "kWh"
         },
         "gas": {
             "sensor_id": 5,
-            "value": 2,
-            "unit": "m3"
+            "value": 1.95,
+            "unit": "m^3"
         }
     },
-    "timestamp": "2023-10-01 12:00:00"
+    "timestamp": "2025-01-20T12:59:01Z"
 }
