@@ -67,9 +67,47 @@ def write_to_influxdb(data):
         # Write the point to InfluxDB
         write_api.write(bucket=bucket, org=org, record=point)
 
+def check_influxdb_connection():
+    """
+    Check if the InfluxDB connection is successful.
+    """
+    try:
+        with InfluxDBClient(url=url, token=token, org=org) as client:
+            health = client.health()
+            if health.status == "pass":
+                print("InfluxDB connection successful.")
+                return True
+            else:
+                print(f"InfluxDB connection failed: {health.message}")
+                return False
+    except Exception as e:
+        print(f"Error connecting to InfluxDB: {e}")
+        return False
+
+def fetch_all_data_from_influxdb():
+    """
+    Fetch all data from the InfluxDB bucket.
+    """
+    query = f'from(bucket: "{bucket}") |> range(start: -1h)'
+    counter = 0
+    with InfluxDBClient(url=url, token=token, org=org) as client:
+        query_api = client.query_api()
+        result = query_api.query(org=org, query=query)
+        return result
+
 if __name__ == "__main__":
-    # Generate and write 10 random data points
-    for _ in range(10):
-        sensor_data = generate_random_sensor_data()
-        write_to_influxdb(sensor_data)
-        print(f"Written data: {sensor_data}")
+    if check_influxdb_connection():
+        # Generate and write 10 random data points
+        for _ in range(3):
+            sensor_data = generate_random_sensor_data()
+            write_to_influxdb(sensor_data)
+            print(f"Written data: {sensor_data}")
+
+        # Fetch and print all data from InfluxDB
+        data = fetch_all_data_from_influxdb()
+        print("Fetched data from InfluxDB:")
+        for table in data:
+            for record in table.records:
+                print(record.values)
+    else:
+        print("Failed to connect to InfluxDB. Data not written.")
